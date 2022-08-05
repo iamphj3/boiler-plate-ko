@@ -1,5 +1,10 @@
 {
+  
   "dependencies": {
+    "body-parser": "^1.20.0",
     "mongoose": "^6.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
