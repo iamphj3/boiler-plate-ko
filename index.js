@@ -2,6 +2,9 @@ const express = require('express') // 모듈 가져옴
 const app = express() // 함수를 이용해 앱 만들기
 const port = 3001 // 아무렇게나 해도 됨
 const bodyParser = require('body-parser');
+
+const config = require('./config/key');
+
 const { User } = require("./models/Users");
 
 //application/x-www-form-urlencoded 분석해서 가져오기
@@ -11,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://hyeonji:eunpha@boilerplate.qfusp1f.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true, useUnifiedTOpology: true // 에러 방지, useCreateIndex: true, useFindAndModify: false -> 지원x
 }).then(() => console.log('MOongoDB Connexted...'))
   .catch(err => console.log(err))
