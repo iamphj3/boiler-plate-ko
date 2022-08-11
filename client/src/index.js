@@ -1,34 +1,36 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-import 'antd/dist/antd.min.css';
-
+import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore} from 'redux';
+import 'antd/dist/antd.min.css';
+import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
-import ReduxThunk from "redux-thunk";
+import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
 
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-  <Provider
-    store={createStoreWithMiddleware(Reducer, 
-        window.__REDUX_DEVTOOLS_EXTENTION__ &&
-        window.__REDUX_DEVTOOLS_EXTENTION__()
-      )}
-  >
-    <App />
-  </Provider>
+  <StrictMode>
+    <Provider
+        store={createStoreWithMiddleware(Reducer,
+            window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__()
+        )}
+    >
+        <App />
+    </Provider> 
+  </StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
