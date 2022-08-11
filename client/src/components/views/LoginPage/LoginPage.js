@@ -30,8 +30,8 @@ function LoginPage(props) {
 
         dispatch(loginUser(body))
             .then(response => {
-              console.log(response.type);
-              console.log(response.payload);
+              // console.log(response.type);
+              // console.log(response.payload);
                 if (response.payload.loginSuccess) {
                     navigate('/')
                 } else {
